@@ -1,4 +1,4 @@
 # ArchLinux_installation-guide
  
-#  Formatar seu HD
+##  Formatar seu HD
 *wipefs -a /Dev/sda
