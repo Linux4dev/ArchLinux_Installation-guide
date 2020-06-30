@@ -47,8 +47,8 @@
 * echo arch >> /etc/hostname
 
 ## 14) Edite o arquivo /etc/hosts adicionando o texto abaixo. Para mais detalhes, favor consultar /Examples/Hosts.
-127.0.0.1     localhost.localdomain            localhost
-::1           localhost.localdomain            localhost
+127.0.0.1     localhost.localdomain            localhost<br>
+::1           localhost.localdomain            localhost<br>
 127.0.1.1     arch.localdomain                 arch 
 
 ## 15) Defina a sua senha root.
