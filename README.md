@@ -1,5 +1,3 @@
-# ArchLinux_installation-guide
- 
 ## 1) Formate seu HD
 * wipefs -a /dev/sda
 
