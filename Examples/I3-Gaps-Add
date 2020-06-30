@@ -1,0 +1,11 @@
+##I3-Gaps##
+for_window [class="^.*"] border pixel 3
+gaps inner 10
+gaps outer 1
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #009401 #009401 #009401 #009401 #009401
+client.focused_inactive #5F1104 #5F1104 #5F1104 #5F1104 #5F1104
+client.unfocused        #5F1104 #5F1104 #5F1104 #5F1104 #5F1104
+client.urgent           #5F1104 #5F1104 #5F1104 #5F1104 #5F1104
+client.placeholder      #5F1104 #5F1104 #5F1104 #5F1104 #5F1104
