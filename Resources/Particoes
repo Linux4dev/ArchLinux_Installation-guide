@@ -1,0 +1,5 @@
+Dispositivo    Início        Fim    Setores Tamanho Tipo
+/dev/sda1        2048    2099199    2097152      1G BIOS inicialização
+/dev/sda2     2099200   12584959   10485760      5G Linux swap
+/dev/sda3    12584960  117442559  104857600     50G Linux sistema de arquivos
+/dev/sda4   117442560 1953525134 1836082575  875,5G Linux sistema de arquivos
