@@ -74,13 +74,16 @@ USER_NAME ALL=(ALL)ALL
 
 ## 21) Reinicie a máquina e conecte-se a internet [Cabeada].
 * systemctl start NetworkManager
+* systemctl enable NetworkManager
 
 ## 21) Reinicie a máquina e conecte-se a internet [Wi-fi] configurando o arquivo /etc/netplan/wifi.yaml. Para mais detalhes, favor consultar /Examples/NetPlan.
+* systemctl start NetworkManager
+* systemctl enable NetworkManager
+* reboot
 * netplan apply
 
-## 22) Atualize o sistema a habilite a inicialiacao do NetworkManager.
+## 22) Atualize o sistema.
 * pacman -Sy
-* systemctl enable NetworkManager
 
 ## 23) Instale o driver de video certo de acrodo com a sua maquina.
 *Intel*
