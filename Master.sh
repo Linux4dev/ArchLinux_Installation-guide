@@ -101,7 +101,7 @@ then
 	echo "[+]"
 	read -p "[+] Enter para continuar..." R
 	clear
-	pacman -S grub dosfstools networkmanager wpa_supplicant wireless_tools dialog vim sudo netplan net-tools
+	pacman -S grub dosfstools networkmanager wpa_supplicant wireless_tools dialog vim git sudo netplan net-tools
 	clear
 	echo "[+] Pacotes instalados"
 	sleep 2
@@ -144,13 +144,13 @@ then
 
 	useradd -m -g users -G wheel administrator
 	clear
-	echo "[+] UsuÃ¡rio administrator criado"
+	echo "[+] Usuario administrator criado"
 	sleep 2
 	clear
 	
 	echo 'administrator ALL=(ALL)ALL' >> /etc/sudoers
 	clear
-	echo "[+] UsuÃ¡rio administrator adicionado ao sudoers"
+	echo "[+] Usuario administrator adicionado ao sudoers"
 	sleep 2
 	clear
 
@@ -167,7 +167,6 @@ then
 	clear
 
 	echo "[+] Grub sendo configurado, favor aguarde..."
-	echo "[+]"
 	grub-install --target=i386-pc --recheck /dev/sda > /dev/null 2>&1
 	cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
 	grub-mkconfig -o /boot/grub/grub.cfg > /dev/null 2>&1
@@ -206,25 +205,26 @@ then
 	clear
 	netplan apply > /dev/null 2>&1
 	clear
-	echo "[-] ConfiguraÃ§Ãµes realizadas"
-	echo "[+] Reiniciando"
+	echo "[-] Configuracoes realizadas"
+	echo "[+] Reiniciando..."
+	sleep 5
 	reboot
 
 elif [ "$1" == "-interface" ]
 then
-	echo "NÃ£o implementado"
+	echo "Nao implementado"
 else
 	clear
 	echo "Linux4dev Arch-Linux-Installer"
 	echo " "
 	echo "Manual de utilizÃ§Ã£o"
 	echo " "
-	echo "-s1 : Inicializa a primeira etapa do programa, deve ser utilizada logo apÃ³s o boot do archlinux, dentre suas diversas implementaÃ§Ãµes a mais importante Ã© a parte de formataÃ§Ã£o e particionamento do disco, portanto siga exatamente as instruÃ§Ãµes fornecidas para que tudo ocorra como o esperado"
+	echo "-s1 : Inicializa a primeira etapa do script, deve ser utilizada logo apos o boot do ArchLinux"
 	echo " "
-	echo "-s2 : Inicializa a segunda parte do programa, responsÃ¡vel pela manipulaÃ§Ã£o da arquivos de configuraÃ§Ã£o e instalaÃ§Ã£o de pacotes para o correto funcionamento do sistema."
+	echo "-s2 : Inicializa a segunda parte do script, responsvel pela configuracao e instalacao de pacotes para o correto funcionamento do sistema."
 	echo " "
-	echo "-wifi : Utilizado para realizar as configuraÃ§Ãµes semi-automaticas do netplan que irÃ¡ te permiter se conectar via Wifi"
+	echo "-wifi : Utilizado para realizar as configuracoes semi-automaticas do netplan que irao te permiter se conectar via Wifi"
 	echo " "
-	echo "-interface : Utilizado para realizar a instalaÃ§Ã£o e configuraÃ§Ã£o de uma interface grafica escolhida pelo usuÃ¡rio"
+	echo "-interface : Utilizado para realizar a instalacao e configuracao de uma interface grafica escolhida pelo usuario"
 	echo " "
 fi
