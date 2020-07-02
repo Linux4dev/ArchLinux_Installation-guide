@@ -61,10 +61,11 @@ then
 	sleep 2
 	clear
 
-	echo "[+] Os pacotes essênciais estão sendo instalados"
+	echo "[+] Os pacotes essênciais serao instalados"
 	echo "[+] Esta etapa pode demorar um pouco"
-	echo "[+] Porfavor, aguarde..."
-	pacstrap /mnt base base-devel linux linux-firware > /dev/null 2>&1
+	echo "[+]"
+	read -p "[+] Enter para continuar..." R
+	pacstrap /mnt base base-devel linux linux-firmware
 	clear
 	echo "[+] Pacotes essênciais instalados"
 	sleep 2
@@ -77,11 +78,13 @@ then
 	clear
 
 	echo "[-] Etapa manual"
-	echo "[-] Utilize manualmente o comando 'arch-chroot /mnt'"
-	echo "[-] Apos entrar no sistema, baixe novamente este instalador"
-	echo "[-] E utilize o comando './Master.sh -s2'"
+	echo "[-]"
+	echo "[-] Acesse o diretorio '/root/ArchLinuxInstaller'"
+	echo "[-] E utilize o comando './Master.sh -s2' para continuar a instalacao"
 	echo "[-]"
 	read -p "[-] Enter para continuar" R
+	clear
+	arch-chroot /mnt
 
 elif [ "$1" == "-s2" ]
 then
@@ -95,7 +98,6 @@ then
 	echo "[+] Pacotes instalados"
 	sleep 2
 	clear
-	
 
 	ln -sf /usr/share/zoneinfo/America/Sao_paulo /etc/localtime
 	hwclock --systohc
@@ -156,9 +158,10 @@ then
 	sleep 2
 	clear
 
-	grub-install --target=i386-pc --recheck /dev/sda
+	echo "[+] Grub sendo instalado, favor aguarde..."
+	grub-install --target=i386-pc --recheck /dev/sda > /dev/null 2>&1
 	cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
-	grub-mkconfig -o /boot/grub/grub.cf
+	grub-mkconfig -o /boot/grub/grub.cf > /dev/null 2>&1
 	clear
 	echo "[+] Grub configurado"
 	sleep 2
