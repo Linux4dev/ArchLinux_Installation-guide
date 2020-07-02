@@ -101,7 +101,7 @@ then
 	echo "[+]"
 	read -p "[+] Enter para continuar..." R
 	clear
-	pacman -S grub dosfstools networkmanager wpa_supplicant wireless_tools dialog vim git sudo netplan net-tools
+	pacman -S grub dosfstools network-manager-applet networkmanager wpa_supplicant wireless_tools dialog vim git sudo netplan net-tools
 	clear
 	echo "[+] Pacotes instalados"
 	sleep 2
