@@ -18,14 +18,14 @@ then
 	clear
 	
 	echo "[-] Etapa manual"
-	echo "[-] Crie uma tabela GPT com as opÃ§Ãµes 'g' e 'w'"
+	echo "[-] Crie uma tabela GPT com as opcoes 'g' e 'w'"
 	echo "[-]"
 	read -p "[-] Enter para continuar" R
 	fdisk /dev/sda
 	clear
 
 	echo "[-] Etapa manual"
-	echo "[-] Crie as partiÃ§Ãµes"
+	echo "[-] Crie as particoes"
 	echo "[-]"
 	echo "[-] [BIOS boot] [Size: 1G]   [Type: BIOS boot]"
 	echo "[-] [SWAP]      [Size: 5G]   [Type: Linux swap]"
@@ -37,12 +37,16 @@ then
 	clear
 	
 	echo "[-] Etapa semi-automatica"
-	echo "[-] Confirme as mensagens a seguir se necessÃ¡rio"
+	echo "[-] Confirme as mensagens a seguir se necessario"
 	echo "[-]"
 	read -p "[-] Enter para continuar" R
+	clear
 	mkfs.fat -F32 /dev/sda1
+	clear
 	mkswap /dev/sda2
+	clear
 	mkfs.ext4 /dev/sda3
+	clear
 	mkfs.ext4 /dev/sda4
 	clear
 
@@ -51,7 +55,7 @@ then
 	mount /dev/sda4 /mnt/home > /dev/null 2>&1
 	swapon /dev/sda2 > /dev/null 2>&1
 	clear
-	echo "[+] PartiÃ§Ãµes montadas"
+	echo "[+] Particoes montadas"
 	sleep 2
 	clear
 
@@ -61,10 +65,11 @@ then
 	sleep 2
 	clear
 
-	echo "[+] Os pacotes essÃªnciais serao instalados"
+	echo "[+] Os pacotes essenciais serao instalados"
 	echo "[+] Esta etapa pode demorar um pouco"
 	echo "[+]"
 	read -p "[+] Enter para continuar..." R
+	clear
 	pacstrap /mnt base base-devel linux linux-firmware
 	clear
 	echo "[+] Pacotes instalados"
@@ -79,7 +84,7 @@ then
 
 	echo "[-] Etapa manual"
 	echo "[-]"
-	echo "[-] Acesse o diretorio '/root/ArchLinuxInstaller'"
+	echo "[-] Acesse o diretorio '/root/ArchLinux_Installer'"
 	echo "[-] E utilize o comando './Master.sh -s2' para continuar a instalacao"
 	echo "[-]"
 	read -p "[-] Enter para continuar" R
@@ -91,7 +96,7 @@ elif [ "$1" == "-s2" ]
 then
 
 	clear
-	echo "[+] Alguns pacotes serÃo instalados"
+	echo "[+] Alguns pacotes serao instalados"
 	echo "[+] Esta etapa pode demorar um pouco"
 	echo "[+]"
 	read -p "[+] Enter para continuar..." R
@@ -161,10 +166,11 @@ then
 	sleep 2
 	clear
 
-	echo "[+] Grub sendo instalado, favor aguarde..."
+	echo "[+] Grub sendo configurado, favor aguarde..."
+	echo "[+]"
 	grub-install --target=i386-pc --recheck /dev/sda > /dev/null 2>&1
 	cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
-	grub-mkconfig -o /boot/grub/grub.cf > /dev/null 2>&1
+	grub-mkconfig -o /boot/grub/grub.cfg > /dev/null 2>&1
 	clear
 	echo "[+] Grub configurado"
 	sleep 2
@@ -180,9 +186,10 @@ then
 	echo "[-] Etapa manual"
 	echo " "
 	echo "[-] Reinicie a maquina com 'exit' seguido de 'reboot'"
-	echo "[-] Em seguida atualize os pacotes"
+	echo "[-] Em seguida atualize os pacotes com 'pacman -Sy'"
 	echo "[-]"
         echo "[-] Welcome to Arch linux !!!"
+	echo "[-]" 
 
 elif [ "$1" == "-wifi" ]
 then	
