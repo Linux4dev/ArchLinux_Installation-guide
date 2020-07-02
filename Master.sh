@@ -1,309 +1,217 @@
 #!/bin/bash
 clear
-echo "[+] ATENÇÃO [+]"
-echo " "
-echo "Este script tem o objetivo de auxiliar seus usuários"
-echo " durante a instalação do archlinux em suas máquinas."
-echo "   O mesmo foi baseado no tutorial da Linux4dev"
-echo " " 
-read -p "Precione qualquer tecla para continuar..." -n 1 X
+if [ "$1" == "-s1" ]
+then
+	clear
+	echo "[+] Inicializando"
+	sleep 4
+	clear
 
-loop="y"
-while [ "$loop" == "y" ]
-do
-echo "1) Formate seu HD"
-echo "2) Configure seu teclado"
-echo "3) Crie uma nova tabela GPT em seu disco"
-echo "4) Crie as partições [Boot, Swap, Raiz e Home]"
-echo "5) Formate suas partições corretamente"
-echo "6) Monte suas partições"
-echo "7) Ajustar espelhos"
-echo "8) Instalar pacotes essênciais em /mnt"
-echo "9) Gerar arquivo fstab"
-echo "10) Acesse seu sistema montado"
-echo "11) Ajustar data e hora"
-echo "12) Ajustar idioma [Pendênte]"
-echo "13) Ajustar linguagem, teclado e hostname"
-echo "14) Editar arquivo /etc/hosts"
-echo "15) Defina sua senha root"
-echo "16) Instalar pacotes essênciais"
-echo "17) Crie seu primeiro usuário"
-echo "18) Adicione o usuário ao arquivo de sudoers"
-echo "19) Altere a senha de seu novo usuário"
-echo "20) Instalar e configurar o grub"
-echo "21) Habilitar NetworkManager"
-echo "22) Reinicie a máquina e atualize os pacotes"
-echo "23) Gerar exemplar de NetPlan [Apenas para wifi]"
-echo "24) Aplicar NetPlan [Apenas para wifi]"
-echo "25) Reinicie a maquina"
-echo " "
-echo "[+] Drivers [+]"
-echo " "
-echo "26) Install Intel drivers"
-echo "27) Install Nvidia drivers"
-echo "28) Install AMD drivers"
-echo "29) install VirtualBox drivers"
-echo " "
-echo "[+] Interface  [+]"
-echo " "
-echo "30) Gnome"
-echo "31) XFCE"
-echo " "
-read -p "Escolha uma opção: " -n 2 Resp
-
-case $Resp in
-1)
-	clear
-	echo "Aguarde..."
-	wipefs -a /dev/sda >/dev/null
-	echo " "
-	sleep 3	
-	echo "[+] Seu HD foi formatado [+]"
-;;
-2)
-	clear	
-	echo "Aguarde..."
-	loadkeys br-abnt2
-	echo " "
-	sleep 3
-	echo "[+] Teclado configurado [+]"       	
-;;
-3)
-	clear
-	echo "[+] ETAPA MANUAL [+]"
-	echo " "
-	echo "Crie uma tabela GPT em seu disco:"
-	echo " "
-	echo "fdisk /dev/sda"
-	echo " "
-	echo "Seguido das opções 'g' e 'w'"
-;;
-4)
-	clear
-	echo "[+] ETAPA MANUAL [+]"
-	echo " "
-	echo "utilize o comando 'cfdisk /dev/sda'"
-	echo "Para criar as partições:" 
-	echo " "
-	echo "[BIOS boot][Size: 1G][Type: BIOS Boot]"
-	echo "[Swap][Size: 5G][Type: Linux swap]"
-	echo "[Raiz][Size: 50G][Type: Linux file system]"
-	echo "[Home][Size: Restante][Type: Linux file system]"
-	echo " "
-	echo "Tutorial em video ()"
-;;
-5)
-	clear
-	echo "[+] ETAPA MANUAL [+]"
-	echo " "
-	echo "Formate suas partições:"
-	echo " "
-	echo "mkfs.fat -F32 BIOS_BOOT"
-	echo "mkswap SWAP"
-	echo "mkfs.ext4 RAIZ"
-	echo "mkfs.ext4 HOME"	
-;;
-6)
-	clear
-	echo "[+] ETAPA MANUAL [+]"
-	echo " "
-	echo "Monte suas partições:"
-	echo " "
-	echo "mount RAIZ /mnt"
-	echo "mkdir /mnt/home"
-	echo "mount HOME /mnt/home"
-	echo "swapon SWAP"
-;;
-7)
-	clear
-	echo "Aguarde..."
-	cat Resources/mirrorlist > /etc/pacman.d/mirrorlist
-	echo " "
-	sleep 3
-	clear
-	echo "[+] Mirrorlist ajustada [+]"
-
-;;
-8)
-	clear
-	echo "Aguarde.."
+	wipefs -a /dev/sda > /dev/null 2>&1
+	echo "[+] HD Formatado"
 	sleep 2
-	pacstrap /mnt base base-devel linux linux-firmware
-	echo " "
-	sleep 3
 	clear
-	echo "[+] Pacotes instalados com sucesso  [+]"
-;;
-9)
+
+	loadkeys br-abnt2 > /dev/null 2>&1
+	echo "[+] Teclado configurado"
+	sleep 2
 	clear
-	echo "Aguarde.."
+	
+	echo "[-] Etapa manual"
+	echo "[-] Crie uma tabela GPT com as opções 'g' e 'w'"
+	echo "[-]"
+	read -p "[-] Enter para continuar" R
+	fdisk /dev/sda
+	clear
+
+	echo "[-] Etapa manual"
+	echo "[-] Crie as partições"
+	echo "[-]"
+	echo "[-] [BIOS boot] [Size: 1G]   [Type: BIOS boot]"
+	echo "[-] [SWAP]      [Size: 5G]   [Type: Linux swap]"
+	echo "[-] [RAIZ]      [Size: 50G]  [Type: Linux file sytem]"
+	echo "[-] [HOME]      [Size: MAX]  [Type: Linux file system]"
+	echo "[-]"
+	read -p "[-] Enter para continuar" R
+	cfdisk /dev/sda
+	clear
+	
+	echo "[-] Etapa semi-automatica"
+	echo "[-] Confirme as mensagens a seguir se necessário"
+	echo "[-]"
+	read -p "[-] Enter para continuar" R
+	mkfs.fat -F32 /dev/sda1
+	mkswap /dev/sda2
+	mkfs.ext4 /dev/sda3
+	mkfs.ext4 /dev/sda4
+	clear
+
+	mount /dev/sda3 /mnt > /dev/null 2>&1
+	mkdir /mnt/home
+	mount /dev/sda4 /mnt/home > /dev/null 2>&1
+	swapon /dev/sda2 > /dev/null 2>&1
+	clear
+	echo "[+] Partições montadas"
+	sleep 2
+	clear
+
+	cat Resources/mirrorlist > /etc/pacman.d/mirrorlist
+	clear
+	echo "[+] Espelhos atualizados"
+	sleep 2
+	clear
+
+	echo "[+] Os pacotes essênciais estão sendo instalados"
+	echo "[+] Esta etapa pode demorar um pouco"
+	echo "[+] Porfavor, aguarde..."
+	pacstrap /mnt base base-devel linux linux-firware > /dev/null 2>&1
+	clear
+	echo "[+] Pacotes essênciais instalados"
+	sleep 2
+	clear
+
 	genfstab -U -p /mnt >> /mnt/etc/fstab
-	echo " "
-	sleep 3
 	clear
-	echo "[+] Arquivo fstab gerado [+]"
-;;
-10)
+	echo "[+] Arquivo fstab gerado"
+	sleep 2
 	clear
-	echo "[+] ETAPA MANUAL [+]"
-	echo " "
-	echo "Utilize o comando 'arch-chroot /mnt'"
-;;
-11)
+
+	echo "[-] Etapa manual"
+	echo "[-] Utilize manualmente o comando 'arch-chroot /mnt'"
+	echo "[-] Apos entrar no sistema, baixe novamente este instalador"
+	echo "[-] E utilize o comando './Master.sh -s2'"
+	echo "[-]"
+	read -p "[-] Enter para continuar" R
+
+elif [ "$1" == "-s2" ]
+then
+
 	clear
-	echo "Aguarde.."
-	ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
+	echo "[+] Alguns pacotes estão sendo instalados"
+	echo "[+] Esta etapa pode demorar um pouco"
+	echo "[+] Porfavor, aguarde..."
+	pacman -S grub dosfstools networkmanager wpa_supplicant wireless_tools dialog vim sudo netplan net-tools
+	clear
+	echo "[+] Pacotes instalados"
+	sleep 2
+	clear
+	
+
+	ln -sf /usr/share/zoneinfo/America/Sao_paulo /etc/localtime
 	hwclock --systohc
-	sleep 3
 	clear
-	echo "[+] Data e hora ajustadas [+]"
-;;
-12)
+	echo "[+] Data e hora ajustadas"
+	sleep 2
 	clear
-	echo "[+] ETAPA MANUAL [+]"
-	echo " "
-	echo "Descomente a linha 'pt_BR.UTF-8 UTF-8'"
-	echo "localizada no arquivo: /etc/locale.gen"
-	echo " "
-	echo "Agora utilize o comando 'locale-gen'"
-	echo "para finalizar a configuração"
-;;
-13)
-	clear
-	echo "Aguarde..."
+
+	echo pt_BR.UTF-8 UTF-8 >> /etc/locale.gen
+	locale-gen > /dev/null 2>&1
 	echo LANG=pt_BR.UTF-8 >> /etc/locale.conf
 	echo KEYMAP=br-abnt2 >> /etc/vconsole.conf
 	echo arch >> /etc/hostname
-	sleep 3
 	clear
-	echo "[+] Linguagem, teclado e hostname configurados [+]"
-;;
-14)
+	echo "[+] Linguagem, teclado e hostname configurados"
+	sleep 2
 	clear
-	echo "Aguarde..."
+
 	cat Resources/hosts > /etc/hosts
-	sleep 3
 	clear
-	echo "[+] Arquivo de hosts configurado [+]"
-;;
-15)
+	echo "[+] Arquivo de hosts configurado"
+	sleep 2
 	clear
-	echo "Aguarde..."
-	sleep 3
+
+	echo "[-] Etapa manual"
+	echo "[-]"
+	echo "[-] Defina uma nova senha para o root"
+	echo "[-]"
+	read -p "[-] Enter para continuar" R
 	clear
 	passwd
-	sleep 3
 	clear
-	echo "[+] Senha atualizada [+]"
-;;
-16)
+	echo "[-] Senha atualizada"
+	sleep 2
 	clear
-	echo "Aguarde..."
-	pacman -S dosfstools mtools networkmanager wpa_supplicant wireless_tools dialog sudo netplan net-tools
-	sleep 3
-	clear
-	echo "[+] Pacotes instalados [+]"
-;;
-17)
-	clear
-	echo "Aguarde..."
-	useradd -m -g users -G wheel administrator
-        sleep 3
-	clear
-	echo "[+] Usuario administrator criado [+]"
-;;
-18)
-	clear
-	echo "Aguarde..."
-	echo 'administrator ALL=(ALL)ALL' >> /etc/sudoers
-	sleep 3
-	clear
-	echo "[+] Usuario administrator agora como sudo [+]"
 
-;;
-19)
+	useradd -m -g users -G wheel administrator
 	clear
-	echo "Aguarde..."
-	sleep 3
+	echo "[+] Usuário administrator criado"
+	sleep 2
 	clear
-	`passwd alan`
-	pwd
-	sleep 3
+	
+	echo 'administrator ALL=(ALL)ALL' >> /etc/sudoers
 	clear
-	echo "[+] Senha do usuario administrator atualiada [+]"
-;;
-20)
+	echo "[+] Usuário administrator adicionado ao sudoers"
+	sleep 2
 	clear
-	echo "Aguarde..."
-	pacman -S grub
+
+	echo "[-] Etapa manual"
+	echo "[-]"
+	echo "[-] Defina uma nova senha para o administrator"
+	echo "[-]"
+	read -p "[-] Enter para continuar" R
+	clear
+	passwd administrator
+	clear
+	echo "[-] Senha atualizada"
+	sleep 2
+	clear
+
 	grub-install --target=i386-pc --recheck /dev/sda
 	cp /usr/share/locale/en\@quot/LC_MESSAGES/grub.mo /boot/grub/locale/en.mo
-	grub-mkconfig -o /boot/grub/grub.cfg
-;;
-21)
+	grub-mkconfig -o /boot/grub/grub.cf
 	clear
-	echo "Aguarde..."
-	systemctl start NetworkManager
-	systemctl enable NetworkManager
-	sleep 3
+	echo "[+] Grub configurado"
+	sleep 2
 	clear
-	echo "[+] NetworkManager habilitado [+]"
-;;
-22)
+
+	systemctl start NetworkManager > /dev/null 2>&1
+	systemctl enable NetworkManager > /dev/null 2>&1
 	clear
-	echo "Após a reinicialização atualize a maquina"
-	sleep 8
-	reboot
-;;
-23)
+	echo "[+] NetworkManager habilitado"
+	sleep 2
 	clear
-	echo "Aguarde..."
+
+	echo "[-] Etapa manual"
+	echo " "
+	echo "[-] Reinicie a maquina com 'exit' seguido de 'reboot'"
+	echo "[-] Em seguida atualize os pacotes"
+	echo "[-]"
+        echo "[-] Welcome to Arch linux !!!"
+
+elif [ "$1" == "-wifi" ]
+then	
+	clear
 	mkdir /etc/netplan
 	touch /etc/netplan/wifi.yaml
 	cat Resources/Wifi.yaml >> /etc/netplan/wifi.yaml
-        sleep 3
+	echo "[-] Etapa manual"
+	echo "[-]"
+	echo "[-] Defina o SSID e Password de sua rede wifi manualmente"
+	echo "[-]"
+	read -p "[-] Enter para continuar" R
+	vim /etc/netplan/wifi.yaml
 	clear
-	echo "Edite o arquivo /etc/netplan/wifi.yaml"
-	echo "para as configurações da sua internet"
-;;
-24)
+	netplan apply > /dev/null 2>&1
 	clear
-	echo "Aguarde..."
-	netplan apply
-	sleep 3
-	clear
-	echo "[+] Netplan aplicado [+]"
-;;
-25)
-	clear
-	echo "Reiniciando, Have fun!!!"
-	sleep 5
+	echo "[-] Configurações realizadas"
+	echo "[+] Reiniciando"
 	reboot
-;;
-*)
-	clear
+
+elif [ "$1" == "-interface" ]
+then
 	echo "Não implementado"
-;;
-esac
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	echo " "
-	read -p "Deseja selecionar outra opção? [y/n]" -n 1 loop
+else
 	clear
-done
+	echo "Linux4dev Arch-Linux-Installer"
+	echo " "
+	echo "Manual de utilizção"
+	echo " "
+	echo "-s1 : Inicializa a primeira etapa do programa, deve ser utilizada logo após o boot do archlinux, dentre suas diversas implementações a mais importante é a parte de formatação e particionamento do disco, portanto siga exatamente as instruções fornecidas para que tudo ocorra como o esperado"
+	echo " "
+	echo "-s2 : Inicializa a segunda parte do programa, responsável pela manipulação da arquivos de configuração e instalação de pacotes para o correto funcionamento do sistema."
+	echo " "
+	echo "-wifi : Utilizado para realizar as configurações semi-automaticas do netplan que irá te permiter se conectar via Wifi"
+	echo " "
+	echo "-interface : Utilizado para realizar a instalação e configuração de uma interface grafica escolhida pelo usuário"
+	echo " "
+fi
