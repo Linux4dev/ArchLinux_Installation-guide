@@ -67,7 +67,7 @@ then
 	read -p "[+] Enter para continuar..." R
 	pacstrap /mnt base base-devel linux linux-firmware
 	clear
-	echo "[+] Pacotes essênciais instalados"
+	echo "[+] Pacotes instalados"
 	sleep 2
 	clear
 
@@ -84,15 +84,18 @@ then
 	echo "[-]"
 	read -p "[-] Enter para continuar" R
 	clear
+	cp -r ../ArchLinuxInstaller /mnt/root
 	arch-chroot /mnt
 
 elif [ "$1" == "-s2" ]
 then
 
 	clear
-	echo "[+] Alguns pacotes estão sendo instalados"
+	echo "[+] Alguns pacotes ser�o instalados"
 	echo "[+] Esta etapa pode demorar um pouco"
-	echo "[+] Porfavor, aguarde..."
+	echo "[+]"
+	read -p "[+] Enter para continuar..." R
+	clear
 	pacman -S grub dosfstools networkmanager wpa_supplicant wireless_tools dialog vim sudo netplan net-tools
 	clear
 	echo "[+] Pacotes instalados"
