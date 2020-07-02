@@ -18,14 +18,14 @@ then
 	clear
 	
 	echo "[-] Etapa manual"
-	echo "[-] Crie uma tabela GPT com as opções 'g' e 'w'"
+	echo "[-] Crie uma tabela GPT com as opÃ§Ãµes 'g' e 'w'"
 	echo "[-]"
 	read -p "[-] Enter para continuar" R
 	fdisk /dev/sda
 	clear
 
 	echo "[-] Etapa manual"
-	echo "[-] Crie as partições"
+	echo "[-] Crie as partiÃ§Ãµes"
 	echo "[-]"
 	echo "[-] [BIOS boot] [Size: 1G]   [Type: BIOS boot]"
 	echo "[-] [SWAP]      [Size: 5G]   [Type: Linux swap]"
@@ -37,7 +37,7 @@ then
 	clear
 	
 	echo "[-] Etapa semi-automatica"
-	echo "[-] Confirme as mensagens a seguir se necessário"
+	echo "[-] Confirme as mensagens a seguir se necessÃ¡rio"
 	echo "[-]"
 	read -p "[-] Enter para continuar" R
 	mkfs.fat -F32 /dev/sda1
@@ -51,7 +51,7 @@ then
 	mount /dev/sda4 /mnt/home > /dev/null 2>&1
 	swapon /dev/sda2 > /dev/null 2>&1
 	clear
-	echo "[+] Partições montadas"
+	echo "[+] PartiÃ§Ãµes montadas"
 	sleep 2
 	clear
 
@@ -61,7 +61,7 @@ then
 	sleep 2
 	clear
 
-	echo "[+] Os pacotes essênciais serao instalados"
+	echo "[+] Os pacotes essÃªnciais serao instalados"
 	echo "[+] Esta etapa pode demorar um pouco"
 	echo "[+]"
 	read -p "[+] Enter para continuar..." R
@@ -84,14 +84,14 @@ then
 	echo "[-]"
 	read -p "[-] Enter para continuar" R
 	clear
-	cp -r ../ArchLinuxInstaller /mnt/root
+	cp -r ../ArchLinux_Installer /mnt/root
 	arch-chroot /mnt
 
 elif [ "$1" == "-s2" ]
 then
 
 	clear
-	echo "[+] Alguns pacotes ser�o instalados"
+	echo "[+] Alguns pacotes serÃo instalados"
 	echo "[+] Esta etapa pode demorar um pouco"
 	echo "[+]"
 	read -p "[+] Enter para continuar..." R
@@ -139,13 +139,13 @@ then
 
 	useradd -m -g users -G wheel administrator
 	clear
-	echo "[+] Usuário administrator criado"
+	echo "[+] UsuÃ¡rio administrator criado"
 	sleep 2
 	clear
 	
 	echo 'administrator ALL=(ALL)ALL' >> /etc/sudoers
 	clear
-	echo "[+] Usuário administrator adicionado ao sudoers"
+	echo "[+] UsuÃ¡rio administrator adicionado ao sudoers"
 	sleep 2
 	clear
 
@@ -199,25 +199,25 @@ then
 	clear
 	netplan apply > /dev/null 2>&1
 	clear
-	echo "[-] Configurações realizadas"
+	echo "[-] ConfiguraÃ§Ãµes realizadas"
 	echo "[+] Reiniciando"
 	reboot
 
 elif [ "$1" == "-interface" ]
 then
-	echo "Não implementado"
+	echo "NÃ£o implementado"
 else
 	clear
 	echo "Linux4dev Arch-Linux-Installer"
 	echo " "
-	echo "Manual de utilizção"
+	echo "Manual de utilizÃ§Ã£o"
 	echo " "
-	echo "-s1 : Inicializa a primeira etapa do programa, deve ser utilizada logo após o boot do archlinux, dentre suas diversas implementações a mais importante é a parte de formatação e particionamento do disco, portanto siga exatamente as instruções fornecidas para que tudo ocorra como o esperado"
+	echo "-s1 : Inicializa a primeira etapa do programa, deve ser utilizada logo apÃ³s o boot do archlinux, dentre suas diversas implementaÃ§Ãµes a mais importante Ã© a parte de formataÃ§Ã£o e particionamento do disco, portanto siga exatamente as instruÃ§Ãµes fornecidas para que tudo ocorra como o esperado"
 	echo " "
-	echo "-s2 : Inicializa a segunda parte do programa, responsável pela manipulação da arquivos de configuração e instalação de pacotes para o correto funcionamento do sistema."
+	echo "-s2 : Inicializa a segunda parte do programa, responsÃ¡vel pela manipulaÃ§Ã£o da arquivos de configuraÃ§Ã£o e instalaÃ§Ã£o de pacotes para o correto funcionamento do sistema."
 	echo " "
-	echo "-wifi : Utilizado para realizar as configurações semi-automaticas do netplan que irá te permiter se conectar via Wifi"
+	echo "-wifi : Utilizado para realizar as configuraÃ§Ãµes semi-automaticas do netplan que irÃ¡ te permiter se conectar via Wifi"
 	echo " "
-	echo "-interface : Utilizado para realizar a instalação e configuração de uma interface grafica escolhida pelo usuário"
+	echo "-interface : Utilizado para realizar a instalaÃ§Ã£o e configuraÃ§Ã£o de uma interface grafica escolhida pelo usuÃ¡rio"
 	echo " "
 fi
