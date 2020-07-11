@@ -8,7 +8,7 @@ then
 	echo "[+]"
 	read -p "[+] Enter para proseguir com a instalacao dos pacotes..."
 	clear
-	sudo pacman -S xorg-server xorg-xinit xorg-apps i3-gaps dmenu i3status i3blocks i3lock xfce4-terminal chromium picom thunar xdg-user-dirs nitrogen leafpad pulseaudio pavucontrol
+	sudo pacman -S xorg-server xorg-xinit xorg-apps i3-gaps dmenu i3status i3blocks i3lock xfce4-terminal chromium picom thunar xdg-user-dirs nitrogen leafpad pulseaudio pavucontrol alsa-utils feh imagemagick xcompmgr lxappearance arc-icon-theme arc-gtk-theme cmatrix lolcat neofetch
 	clear
 	echo "[-] Etapa manual"
 	echo "[-]"
