@@ -55,7 +55,7 @@ void buildHD(){
     print("[-]");
     print("[-] [BIOS boot] [Size: 1G]   [Type: BIOS boot]");
     print("[-] [SWAP]      [Size: 5G]   [Type: Linux swap]");
-    print("[-] [ROOT]      [Size: 50G]  [Type: Linux file sytem]");
+    print("[-] [ROOT]      [Size: 50G]  [Type: Linux file system]");
     print("[-] [HOME]      [Size: MAX]  [Type: Linux file system]");
     print("[-]");
     enterToContinue();
@@ -123,7 +123,7 @@ void switchSystem(){
     print("[-] And use the command './setup -s2' to continue the installation");
     print("[-]");
     enterToContinue();
-    system("cp -r ../ArchLinux_Installer /mnt/root");
+    system("git clone https://github.com/Linux4dev/ArchLinux_Installer /mnt/root");
     system("arch-chroot /mnt");
 }
 
@@ -225,12 +225,11 @@ void finish(){
     setup();
     print("[-] Manual step");
     print("[-]");
-    print("[-] Restart the machine with 'reboot'");
-    print("[-] Then update the packages with 'pacman -Sy'");
+    print("[-] Use 'exit' to return to the main system and 'reboot' to restart it");
     print("[-]");
     print("[-] Welcome to Arch linux !!!");
     print("[-]");
-    system("exit");
+    teardown();
 }
 
 void helpMessage(){
