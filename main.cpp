@@ -123,7 +123,8 @@ void switchSystem(){
     print("[-] And use the command './setup -s2' to continue the installation");
     print("[-]");
     enterToContinue();
-    system("git clone https://github.com/Linux4dev/ArchLinux_Installer /mnt/root");
+    system("mkdir -p /mnt/root/ArchLinux_Installer");
+    system("git clone https://github.com/Linux4dev/ArchLinux_Installer /mnt/root/ArchLinux_Installer > /dev/null 2>&1");
     system("arch-chroot /mnt");
 }
 
