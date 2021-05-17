@@ -134,7 +134,7 @@ void installMorePackages(){
     print("[+] This step may take a while");
     print("[+]");
     enterToContinue();
-    system("pacman -S grub dosfstools network-manager-applet networkmanager wpa_supplicant wireless_tools dialog vim glibc git sudo netplan net-tools");
+    system("pacman -Sy grub dosfstools network-manager-applet networkmanager wpa_supplicant wireless_tools dialog vim glibc git sudo netplan net-tools");
     system("clear");
     print("[+] Installed packages");
     teardown();
